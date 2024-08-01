@@ -1,0 +1,9 @@
+{
+    "name" : "Todo",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "action": {
+        "default_title": "Todo",
+        "default_popup": "index.html"
+    }
+}
