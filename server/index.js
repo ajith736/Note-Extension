@@ -1,87 +1,59 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const pool = require("./db")
+const pool = require("./db");
 
-//middleware 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-//ROUTES
-app.get("/", async(req,res)=> {
-    res.json({
-        "message":"testing"
-    })
-})
-
-// create a todo
-app.post("/todos", async(req,res) => {
-    try{
-        const {description} = req.body;
+// Create a todo
+app.post("/todos", async (req, res) => {
+    try {
+        const { description, favorited } = req.body;
         const newTodo = await pool.query(
-            "INSERT INTO todo(description) VALUES($1) RETURNING *",
-            [description]
+            "INSERT INTO todo (description, favorited) VALUES ($1, $2) RETURNING *",
+            [description, favorited]
         );
-         res.json(newTodo.rows[0]);
-    }
-    catch(err){
-        console.error(err.message);
-    }
-})
-
-// get all todos
-app.get("/todos",async(req,res) => {
-    try{
-        const allTodos = await pool.query("SELECT* FROM todo")
-        res.json(allTodos.rows)
-
-    }
-    catch(err){
-        console.error(err.message);
-    }
-})
-
-// get a todo
-app.get("/todos/:id",async(req,res) => {
-    try{
-        const {id} = req.params;
-        const todo =  await pool.query("SELECT* FROM todo WHERE todo_id = $1",[id])
-        res.json(todo.rows[0])
-
-    }
-    catch(err){
-        console.error(err.message);
-    }
-})
-
-//uptade a todo
-app.put("/todos/:id",async(req,res)=>{ 
-    try {
-        const {id} = req.params;
-        const {description} = req.body;
-        const updateToDos = await pool.query("UPDATE todo SET description = $1 WHERE todo_id = $2",
-        [description,id])
-        res.json("todo was updated")
-        
-    } catch (err) {
-        console.error(err.message);
-        
-    }
- })
-
- //delete a todo
-
- app.delete("/todos/:id",async(req,res)=>{
-    try {
-        const {id} = req.params;
-        const deleToDo = await pool.query("DELETE FROM todo WHERE todo_id = $1",[id])
-        res.json("todo deleted")
+        res.json(newTodo.rows[0]);
     } catch (err) {
         console.error(err.message);
     }
-})
+});
 
+// Get all todos
+app.get("/todos", async (req, res) => {
+    try {
+        const allTodos = await pool.query("SELECT * FROM todo ORDER BY favorited DESC");
+        res.json(allTodos.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
 
-app.listen(5000,() => {
-    console.log("started at port 5000")
+app.patch("/todos/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { favorited } = req.body;
+        await pool.query("UPDATE todo SET favorited = $1 WHERE todo_id = $2", [favorited, id]);
+        res.json("Todo updated");
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error");
+    }
+});
+
+// Delete a todo
+app.delete("/todos/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        await pool.query("DELETE FROM todo WHERE todo_id = $1", [id]);
+        res.json("Todo deleted");
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+app.listen(5000, () => {
+    console.log("Server started on port 5000");
 });
