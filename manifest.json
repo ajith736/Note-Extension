@@ -1,9 +1,15 @@
 {
-    "name" : "Todo",
+    "name": "Todo",
     "version": "1.0.0",
     "manifest_version": 3,
     "action": {
-        "default_title": "Todo",
-        "default_popup": "index.html"
+      "default_title": "Todo",
+      "default_popup": "index.html",
+      "default_icon": {
+        "16": "icons/icon1.png",
+        "48": "icons/icon1.png",
+        "128": "icons/icon1.png"
+      }
     }
-}
+  }
+  
