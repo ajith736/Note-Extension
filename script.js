@@ -74,7 +74,7 @@ const renderTodos = (todos) => {
         deleteButton.classList.add('delete');
         deleteButton.addEventListener('click', async () => {
             try {
-                const response = await fetch(`https://note-extension-git-main-ajith-cs-projects.vercel.app/${todo.todo_id}`, {
+                const response = await fetch(`https://note-extension-git-main-ajith-cs-projects.vercel.app/todos/${todo.todo_id}`, {
                     method: 'DELETE'
                 });
                 if (response.ok) {
