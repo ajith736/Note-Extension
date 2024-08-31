@@ -2,7 +2,7 @@ document.getElementById('add-task').addEventListener('click', async () => {
     let description = document.getElementById('new-task').value;
     if (description) {
         try {
-            const response = await fetch("http://localhost:5000/todos", {
+            const response = await fetch("https://note-extension-git-main-ajith-cs-projects.vercel.app/todos", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ description: description, favorited: false })
@@ -20,7 +20,7 @@ document.getElementById('add-task').addEventListener('click', async () => {
 
 const getTodos = async () => {
     try {
-        const response = await fetch("http://localhost:5000/todos");
+        const response = await fetch("https://note-extension-git-main-ajith-cs-projects.vercel.app/todos");
         const data = await response.json();
         renderTodos(data);
     } catch (error) {
@@ -46,7 +46,7 @@ const renderTodos = (todos) => {
             console.log(`Updating todo with id: ${todo.todo_id}, favorited: ${newFavoritedStatus}`);
         
             try {
-                const response = await fetch(`http://localhost:5000/todos/${todo.todo_id}`, {
+                const response = await fetch(`https://note-extension-git-main-ajith-cs-projects.vercel.app/todos/${todo.todo_id}`, {
                     method: 'PATCH',
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ favorited: newFavoritedStatus })
@@ -74,7 +74,7 @@ const renderTodos = (todos) => {
         deleteButton.classList.add('delete');
         deleteButton.addEventListener('click', async () => {
             try {
-                const response = await fetch(`http://localhost:5000/todos/${todo.todo_id}`, {
+                const response = await fetch(`https://note-extension-git-main-ajith-cs-projects.vercel.app/${todo.todo_id}`, {
                     method: 'DELETE'
                 });
                 if (response.ok) {
