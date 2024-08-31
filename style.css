@@ -1,4 +1,5 @@
-/* body {
+/* 
+ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
@@ -18,10 +19,16 @@
     max-width: 400px;
 }
 
+
 h1 {
     margin-top: 0;
     text-align: center;
+    background-color: yellow;
+    padding: 10px;
+    border-radius: 4px;
+    font-family: cursive; 
 }
+
 
 .input-container {
     display: flex;
@@ -52,6 +59,7 @@ button:hover {
     background: #0056b3;
 }
 
+
 ul {
     list-style: none;
     padding: 0;
@@ -65,16 +73,29 @@ li {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #f9f9f9;
 }
 
-li .delete {
-    color: #e74c3c;
+li:hover {
+    background-color: #e9ecef;
+}
+
+
+.delete {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
+    font-size: 14px;
 }
 
- */
-/* General Styles */
-/* General Styles */
+.delete:hover {
+    background-color: #c82333;
+} */
+
+/*------------------------------------------------------------------------------------------------------------------------*/
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -102,7 +123,7 @@ h1 {
     background-color: yellow;
     padding: 10px;
     border-radius: 4px;
-    font-family: cursive; /* Added cursive font */
+    font-family: cursive;
 }
 
 /* Input and Button Styles */
@@ -156,6 +177,18 @@ li:hover {
     background-color: #e9ecef;
 }
 
+/* Favorite Icon Styles */
+.fav-icon {
+    cursor: pointer;
+    font-size: 20px; /* Adjust size as needed */
+    margin-right: 10px;
+    color: #ccc; /* Default color for the unfilled star */
+}
+
+.fav-icon.fa-solid {
+    color: gold; /* Color when the star is filled */
+}
+
 /* Delete Button Styles */
 .delete {
     background-color: #dc3545;
@@ -170,3 +203,8 @@ li:hover {
 .delete:hover {
     background-color: #c82333;
 }
+
+
+
+
+
