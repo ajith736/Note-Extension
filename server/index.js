@@ -8,6 +8,10 @@ app.use(cors());
 app.use(express.json());
 require('dotenv').config()
 
+app.get("/", async(req,res)=>{
+    res.send("NoteBlitz!! Deployed")
+})
+
 // Create a todo
 app.post("/todos", async (req, res) => {
     try {
