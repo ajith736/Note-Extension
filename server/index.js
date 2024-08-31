@@ -6,6 +6,7 @@ const pool = require("./db");
 // Middleware
 app.use(cors());
 app.use(express.json());
+require('dotenv').config()
 
 // Create a todo
 app.post("/todos", async (req, res) => {
@@ -54,6 +55,6 @@ app.delete("/todos/:id", async (req, res) => {
     }
 });
 
-app.listen(5000, () => {
+app.listen(process.env.PORT, () => {
     console.log("Server started on port 5000");
 });
