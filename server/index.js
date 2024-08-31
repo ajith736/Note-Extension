@@ -55,6 +55,8 @@ app.delete("/todos/:id", async (req, res) => {
     }
 });
 
+console.log(process.env.PORT);
+
 app.listen(process.env.PORT, () => {
     console.log("Server started on port 5000");
 });
